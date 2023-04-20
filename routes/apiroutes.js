@@ -22,4 +22,11 @@ fs.writeFile('db/db.json',JSON.stringify(dbData),(err)=>{
 })
 })
 
+router.delete('/api/notes/:id',(req,res)=>{
+    const dbData=JSON.parse(fs.readFileSync('db/db.json'))
+    const removeNotes=dbData.filter((deleteNote)=>deleteNote.id !== req.params.id)
+    fs.writeFileSync('db/db.json',JSON.stringify(removeNotes))
+    res.json(removeNotes)
+})
+
 module.exports=router
